@@ -48,12 +48,19 @@
   text-align: center;
 }
 
+
 .learning-button {
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 16px 32px;
+
   background: linear-gradient(135deg, #4776e6, #3155c6);
   color: white;
   font-family: Arial, sans-serif;
@@ -62,17 +69,15 @@
   text-decoration: none;
   border-radius: 14px;
   box-shadow: 0 6px 14px rgba(49, 85, 198, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .learning-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 9px 18px rgba(49, 85, 198, 0.35);
+  background: #1d4ed8;
 }
 
 .button-arrow {
   font-size: 24px;
-  transition: transform 0.2s ease;
 }
 
 .learning-button:hover .button-arrow {
@@ -96,15 +101,16 @@
 </button>
 
 <div class="learning-container">
-  <a
-    href="https://sites.google.com/view/chatbot-assignment-2/home"
-    class="learning-button"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Start Learning
-    <span class="button-arrow">→</span>
-  </a>
+ 
+<a
+  href="https://sites.google.com/view/chatbot-assignment-2/home"
+  class="learning-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Start Learning <span class="button-arrow">→</span>
+</a>
+  
 </div>
   
 <script>
