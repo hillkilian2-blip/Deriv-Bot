@@ -41,6 +41,43 @@
   .play-btn:hover {
     background-color: #1557b0;
   }
+  
+.learning-container {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.learning-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #4776e6, #3155c6);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(49, 85, 198, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.learning-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 18px rgba(49, 85, 198, 0.35);
+}
+
+.button-arrow {
+  font-size: 24px;
+  transition: transform 0.2s ease;
+}
+
+.learning-button:hover .button-arrow {
+  transform: translateX(4px);
+}
 </style>
 </head>
 
@@ -58,6 +95,18 @@
   <span id="text">Play Audio</span>
 </button>
 
+<div class="learning-container">
+  <a
+    href="https://sites.google.com/view/chatbot-assignment-2/home"
+    class="learning-button"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Start Learning
+    <span class="button-arrow">→</span>
+  </a>
+</div>
+  
 <script>
   const audio = document.getElementById("myAudio");
   const button = document.getElementById("playButton");
