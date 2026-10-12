@@ -2,218 +2,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Financial Derivatives Learning</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Derivatives Learning</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 24px 16px;
+    font-family: Arial, sans-serif;
+    background: #d9f1fe;
+    color: #101D3A;
+  }
+
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .heading {
+    margin-bottom: 20px;
+    font-size: 34px;
+    font-weight: bold;
+    color: #101D3A;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .topic-button {
+    min-height: 50px;
+    padding: 10px 12px;
+    border: 1px solid #101D3A;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #101D3A;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .topic-button.active {
+    background: #FFFBD3;
+    color: #101D3A;
+    border-color: #101D3A;
+  }
+
+  .topic-button.active:hover {
+    background: #F5EFB8;
+    transform: translateY(-2px);
+  }
+
+  .topic-button:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+  }
+
+  #chat-section {
+    display: none;
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .chat-heading {
+    text-align: center;
+    color: #101D3A;
+    font-size: 22px;
+  }
+
+  .back-button {
+    display: block;
+    margin: 0 auto 16px;
+    padding: 10px 18px;
+    border: 1px solid #101D3A;
+    border-radius: 8px;
+    background: #FFFBD3;
+    color: #101D3A;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .back-button:hover {
+    background: #F5EFB8;
+  }
+
+  /* Custom chatbot */
+
+  .chat-app {
+    --chat-bg: #e8fdff;
+    --chat-ink: #11213a;
+    --chat-muted: #5b6676;
+    --chat-accent: #00aedb;
+    --chat-card: #ffffff;
+
+    width: 100%;
+    max-width: 960px;
+    height: 620px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    background: var(--chat-bg);
+    color: var(--chat-ink);
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px 0 20px;
+  }
+
+  .chat-msg {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .chat-msg.chat-user {
+    justify-content: flex-end;
+  }
+
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    flex: none;
+    display: grid;
+    place-items: center;
+  }
+
+  .chat-avatar svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .chat-body {
+    flex: 1;
+    max-width: 740px;
+    min-width: 0;
+  }
+
+  .chat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .chat-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--chat-muted);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .chat-tools button {
+    all: unset;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    color: var(--chat-muted);
+  }
+
+  .chat-tools button:hover,
+  .chat-tools button.on {
+    color: var(--chat-accent);
+  }
+
+  .chat-tools svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .chat-bubble {
+    background: var(--chat-card);
+    border-radius: 8px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(0, 174, 219, 0.12);
+    margin-top: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .chat-bubble p {
+    margin: 0 0 10px;
+  }
+
+  .chat-bubble p:last-child {
+    margin-bottom: 0;
+  }
+
+  .chat-bubble strong {
+    font-weight: 600;
+  }
+
+  .chat-bubble ul {
+    margin: 0 0 10px;
+    padding-left: 22px;
+  }
+
+  .chat-user-bubble {
+    background: var(--chat-accent);
+    color: #fff;
+    font-weight: 500;
+    padding: 12px 18px;
+    border-radius: 8px;
+    max-width: 80%;
+    margin-top: 36px;
+    overflow-wrap: anywhere;
+  }
+
+  .chat-user.first .chat-user-bubble {
+    margin-top: 0;
+  }
+
+  .chat-typing {
+    display: inline-flex;
+    gap: 5px;
+    padding: 6px 0;
+  }
+
+  .chat-typing i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #9aa6b5;
+    animation: chat-blink 1.1s infinite ease-in-out;
+  }
+
+  .chat-typing i:nth-child(2) {
+    animation-delay: .15s;
+  }
+
+  .chat-typing i:nth-child(3) {
+    animation-delay: .3s;
+  }
+
+  @keyframes chat-blink {
+    0%, 80%, 100% { opacity: .3; }
+    40% { opacity: 1; }
+  }
+
+  .chat-composer {
+    flex: none;
+    padding: 0 0 4px;
+  }
+
+  .chat-field {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 2px solid var(--chat-accent);
+    border-radius: 10px;
+    padding: 4px;
+  }
+
+  .chat-field input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #d5dde5;
+    outline: 0;
+    background: #fff;
+    font: inherit;
+    font-size: 16px;
+    color: var(--chat-ink);
+    padding: 12px;
+    border-radius: 6px;
+    margin: 4px;
+  }
+
+  .chat-field input::placeholder {
+    color: #5f6b7a;
+  }
+
+  .chat-field button {
+    all: unset;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-right: 6px;
+    color: #65758a;
+    flex: none;
+  }
+
+  .chat-field button:hover,
+  .chat-field button:focus-visible {
+    color: var(--chat-accent);
+  }
+
+  .chat-field button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .chat-spacer {
+    height: 12px;
+  }
+
+  @media (max-width: 480px) {
     body {
-      margin: 0;
-      padding: 24px 16px;
-      font-family: Arial, sans-serif;
-      background: #d9f1fe;
-      color: #101D3A;
-    }
-
-    .container {
-      max-width: 850px;
-      margin: 0 auto;
-      text-align: center;
+      padding: 18px 10px;
     }
 
     .heading {
-      margin-bottom: 8px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #101D3A;
-    }
-
-    .intro {
-      max-width: 600px;
-      margin: 0 auto 25px;
-      line-height: 1.6;
-      color: #101D3A;
+      font-size: 27px;
     }
 
     .topic-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
-.topic-button {
-  min-height: 50px;
-  padding: 10px 12px;
-  border: 1px solid #101D3A;
-  border-radius: 10px;
-  background: #FFFFFF;
-  color: #101D3A;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-    .topic-button.active {
-      background: #FFFBD3;
-      color: #101D3A;
-      border-color: #101D3A;
+    .topic-button {
+      min-height: 45px;
     }
 
-    .topic-button.active:hover {
-      background: #F5EFB8;
-      transform: translateY(-2px);
-    }
-
-    .topic-button:disabled {
-      opacity: 0.85;
-      cursor: not-allowed;
-    }
-
-    #chat-section {
-      display: none;
-      margin-top: 28px;
-    }
-
-    .chat-heading {
-      color: #101D3A;
-      font-size: 22px;
-    }
-
-    .back-button {
-      margin-bottom: 16px;
-      padding: 10px 18px;
-      border: 1px solid #101D3A;
-      border-radius: 8px;
-      background: #FFFBD3;
-      color: #101D3A;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .back-button:hover {
-      background: #F5EFB8;
-    }
-
-    .chat-frame {
-      display: block;
-      width: 100%;
+    .chat-app {
       height: 600px;
-      border: none;
-      border-radius: 12px;
-      background: #FFFFFF;
+      padding: 0 10px;
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 18px 10px;
-      }
-
-      .heading {
-        font-size: 25px;
-      }
-
-      .topic-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .topic-button {
-        min-height: 60px;
-      }
-
-      .chat-frame {
-        height: 600px;
-      }
+    .chat-bubble {
+      padding: 12px;
     }
-  </style>
+
+    .chat-tools {
+      gap: 5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat-typing i {
+      animation: none;
+      opacity: .6;
+    }
+  }
+</style>
 </head>
 
 <body>
-  <main class="container">
+<main class="container">
 
-    <div id="menu-section">
-    
-<div class="heading">
-  Choose a Derivative to start learning.
-</div>
+  <div id="menu-section">
+    <div class="heading">Choose a Derivative to start learning.</div>
 
-      <div class="topic-grid">
-        <button class="topic-button" disabled>
-          Futures
-        </button>
-
-        <button class="topic-button" disabled>
-          Currency Swaps
-        </button>
-
-        <button class="topic-button" disabled>
-          Call Options
-        </button>
-
-        <button class="topic-button" disabled>
-          Interest Rate Swaps
-        </button>
-
-        <button class="topic-button" disabled>
-          Forwards
-        </button>
-
-        <button
-          class="topic-button active"
-          type="button"
-          onclick="showChatbot()"
-        >
-          Put Options
-        </button>
-      </div>
-    </div>
-
-    <section id="chat-section">
-      <h2 class="chat-heading">Put Options Chatbot</h2>
+    <div class="topic-grid">
+      <button class="topic-button" disabled>Futures</button>
+      <button class="topic-button" disabled>Currency Swaps</button>
+      <button class="topic-button" disabled>Call Options</button>
+      <button class="topic-button" disabled>Interest Rate Swaps</button>
+      <button class="topic-button" disabled>Forwards</button>
 
       <button
-        class="back-button"
+        class="topic-button active"
         type="button"
-        onclick="hideChatbot()"
+        onclick="showChatbot()"
       >
-        Back to Topics
+        Put Options
       </button>
+    </div>
+  </div>
 
-      <iframe
-        class="chat-frame"
-        title="Put Options Chatbot"
-        src="https://interfaces.zapier.com/embed/chatbot/cmv0c7s9s001g8wwwf4hj0ewj"
-        allow="clipboard-write *"
-      ></iframe>
-    </section>
+  <section id="chat-section">
+    <h2 class="chat-heading">Put Options Chatbot</h2>
 
-  </main>
+    <button
+      class="back-button"
+      type="button"
+      onclick="hideChatbot()"
+    >
+      Back to Topics
+    </button>
 
-  <script>
-    function showChatbot() {
-      document.getElementById("menu-section").style.display = "none";
-      document.getElementById("chat-section").style.display = "block";
+    <div class="chat-app">
+      <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
 
-      document.getElementById("chat-section").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      <div class="chat-composer">
+        <form class="chat-field" id="chat-form" autocomplete="off">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Ask me more about Put Options"
+            aria-label="Your question"
+          >
+
+          <button type="submit" aria-label="Send">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.5 3.2 22 12 2.5 20.8l.1-6.9L15 12 2.6 10.1z"/>
+            </svg>
+          </button>
+        </form>
+        <div class="chat-spacer"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* =====================================================
+   EDIT YOUR QUESTIONS AND ANSWERS IN THIS SECTION
+   The chatbot displays only the answer you provide.
+   ===================================================== */
+
+const BOT_NAME = "Chatbot";
+const GREETING = "Want to know about put options?";
+const FALLBACK = "Sorry, I don't have an answer for that yet. Try asking something about put options.";
+
+const QA = [
+  {
+    keywords: [
+      "what are put options",
+      "what is a put option",
+      "what is a put",
+      "put options"
+    ],
+    answer: `<p>A <strong>put option</strong> gives the buyer the right, but not the obligation, to sell an underlying asset at a specified <strong>strike price</strong> within a specific timeframe.</p>
+             <p>Buyers often use puts to profit from a price decline or hedge against downside risk.</p>`
+  },
+  {
+    keywords: [
+      "what is the strike price",
+      "explain strike price",
+      "strike price"
+    ],
+    answer: `<p>REPLACE WITH YOUR ANSWER about the strike price.</p>`
+  },
+  {
+    keywords: [
+      "when does a put option expire",
+      "what is expiration",
+      "expiration date",
+      "expiration",
+      "expiry",
+      "expire"
+    ],
+    answer: `<p>REPLACE WITH YOUR ANSWER about expiration.</p>`
+  },
+  {
+    keywords: [
+      "what is the premium",
+      "how much does a put option cost",
+      "option premium",
+      "premium",
+      "cost of a put option"
+    ],
+    answer: `<p>REPLACE WITH YOUR ANSWER about premiums.</p>`
+  }
+
+  // Add more questions using this format:
+  // {
+  //   keywords: ["your question", "another way to ask"],
+  //   answer: `<p>Your exact answer goes here.</p>`
+  // },
+];
+
+/* ===================================================== */
+
+const $messages = document.getElementById("chat-messages");
+const $input = document.getElementById("chat-input");
+const $form = document.getElementById("chat-form");
+
+const ROBOT = `<svg viewBox="0 0 40 40" aria-hidden="true">
+  <circle cx="20" cy="6" r="2.2" fill="#00aedb"/>
+  <rect x="19" y="6" width="2" height="5" fill="#8fa3b8"/>
+  <rect x="9" y="11" width="22" height="16" rx="7" fill="#eef3f8" stroke="#c4d0dc"/>
+  <rect x="12.5" y="14.5" width="15" height="9" rx="4.5" fill="#1b2a41"/>
+  <circle cx="17" cy="19" r="1.7" fill="#4de1ff"/>
+  <circle cx="23" cy="19" r="1.7" fill="#4de1ff"/>
+  <rect x="13" y="28" width="14" height="8" rx="4" fill="#eef3f8" stroke="#c4d0dc"/>
+  <circle cx="8" cy="30" r="2.4" fill="#eef3f8" stroke="#c4d0dc"/>
+  <circle cx="32" cy="24" r="2.4" fill="#eef3f8" stroke="#c4d0dc"/>
+</svg>`;
+
+const ICON_UP = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 10v10H3V10zM7 10l4-7c1.7 0 3 1.3 3 3v4h5.5a2 2 0 0 1 2 2.3l-1.2 7a2 2 0 0 1-2 1.7H7"/>
+</svg>`;
+
+const ICON_DOWN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1) rotate(180deg)">
+  <path d="M7 10v10H3V10zM7 10l4-7c1.7 0 3 1.3 3 3v4h5.5a2 2 0 0 1 2 2.3l-1.2 7a2 2 0 0 1-2 1.7H7"/>
+</svg>`;
+
+const ICON_COPY = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="8" y="8" width="12" height="12" rx="2"/>
+  <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>
+</svg>`;
+
+function timeNow() {
+  const d = new Date();
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2, "0");
+  const ap = h >= 12 ? "pm" : "am";
+  h = h % 12 || 12;
+  return `${h}:${m}${ap}`;
+}
+
+function scrollChat() {
+  $messages.scrollTop = $messages.scrollHeight;
+}
+
+function addBot(html, withTools = true) {
+  const el = document.createElement("div");
+  el.className = "chat-msg chat-bot";
+
+  el.innerHTML = `
+    <div class="chat-avatar">${ROBOT}</div>
+    <div class="chat-body">
+      <div class="chat-head">
+        <span>${BOT_NAME}</span>
+        ${withTools ? `
+          <span class="chat-tools">
+            <button type="button" data-act="up" aria-label="Good answer">${ICON_UP}</button>
+            <button type="button" data-act="down" aria-label="Bad answer">${ICON_DOWN}</button>
+            <button type="button" data-act="copy" aria-label="Copy answer">${ICON_COPY}</button>
+            <span>${timeNow()}</span>
+          </span>
+        ` : ""}
+      </div>
+      <div class="chat-bubble">${html}</div>
+    </div>
+  `;
+
+  $messages.appendChild(el);
+  scrollChat();
+  return el;
+}
+
+function addUser(text) {
+  const el = document.createElement("div");
+  el.className = "chat-msg chat-user";
+
+  if (!$messages.querySelector(".chat-user")) {
+    el.classList.add("first");
+  }
+
+  const bubble = document.createElement("div");
+  bubble.className = "chat-user-bubble";
+  bubble.textContent = text;
+
+  el.appendChild(bubble);
+  $messages.appendChild(el);
+  scrollChat();
+}
+
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function findAnswer(text) {
+  const question = " " + normalize(text) + " ";
+  let bestAnswer = null;
+  let bestLength = 0;
+
+  for (const item of QA) {
+    for (const keyword of item.keywords) {
+      const normalizedKeyword = " " + normalize(keyword) + " ";
+
+      if (
+        question.includes(normalizedKeyword) &&
+        normalizedKeyword.length > bestLength
+      ) {
+        bestAnswer = item;
+        bestLength = normalizedKeyword.length;
+      }
+    }
+  }
+
+  return bestAnswer
+    ? bestAnswer.answer
+    : `<p>${FALLBACK}</p>`;
+}
+
+function ask(text) {
+  addUser(text);
+
+  const typing = addBot(
+    `<span class="chat-typing"><i></i><i></i><i></i></span>`,
+    false
+  );
+
+  setTimeout(() => {
+    typing.remove();
+    addBot(findAnswer(text));
+  }, 400);
+}
+
+$form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const text = $input.value.trim();
+  if (!text) return;
+
+  $input.value = "";
+  ask(text);
+});
+
+$messages.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-act]");
+  if (!button) return;
+
+  const action = button.dataset.act;
+
+  if (action === "copy") {
+    const answer = button
+      .closest(".chat-body")
+      .querySelector(".chat-bubble").innerText;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(answer).catch(() => {});
     }
 
-    function hideChatbot() {
-      document.getElementById("chat-section").style.display = "none";
-      document.getElementById("menu-section").style.display = "block";
+    button.classList.add("on");
+    setTimeout(() => button.classList.remove("on"), 1200);
+  } else {
+    const tools = button.closest(".chat-tools");
 
-      document.getElementById("menu-section").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-  </script>
+    tools.querySelectorAll('[data-act="up"], [data-act="down"]')
+      .forEach((item) => item.classList.remove("on"));
+
+    button.classList.add("on");
+  }
+});
+
+function showChatbot() {
+  document.getElementById("menu-section").style.display = "none";
+  document.getElementById("chat-section").style.display = "block";
+
+  document.getElementById("chat-section").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  $input.focus();
+}
+
+function hideChatbot() {
+  document.getElementById("chat-section").style.display = "none";
+  document.getElementById("menu-section").style.display = "block";
+
+  document.getElementById("menu-section").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+addBot(`<p>${GREETING}</p>`, false);
+</script>
 </body>
 </html>
