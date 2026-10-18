@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -435,44 +434,128 @@ const FALLBACK = "Sorry, I don't have an answer for that yet. Try asking somethi
 const QA = [
   {
     keywords: [
-      "what are put options",
+      "What exactly is a put option?",
       "what is a put option",
-      "what is a put",
-      "put options"
+      "what are put options",
+      "define put option"
     ],
-    answer: `<p>A <strong>put option</strong> gives the buyer the right, but not the obligation, to sell an underlying asset at a specified <strong>strike price</strong> within a specific timeframe.</p>
-             <p>Buyers often use puts to profit from a price decline or hedge against downside risk.</p>`
+    answer: `<p>A <strong>put option</strong> is a contract that gives the buyer the right, but not the obligation, to sell an asset at the strike price by the expiration date.</p>`
   },
   {
     keywords: [
+      "And how does a put option work?"
+    ],
+    answer: `<p>A put option is like insurance for a stock you own: you pay a fee for the right to sell it at a set price.</p>
+             <ul>
+               <li>If the stock drops below that price, you use the put and sell at the higher price and you're protected.</li>
+               <li>If the stock rises, you skip the put and sell at the market price and you only lose the fee.</li>
+             </ul>`
+  },
+  {
+    keywords: [
+      "You mentioned strike price before. What is that?",
       "what is the strike price",
-      "explain strike price",
-      "strike price"
+      "strike price",
+      "define strike price"
     ],
-    answer: `<p>REPLACE WITH YOUR ANSWER about the strike price.</p>`
+    answer: `<p>The <strong>strike price</strong> is the agreed price at which the buyer can sell the asset using a put option.</p>`
   },
   {
     keywords: [
-      "when does a put option expire",
-      "what is expiration",
+      "How about the expiration date?",
+      "what is the expiration date",
       "expiration date",
-      "expiration",
-      "expiry",
-      "expire"
+      "when does a put option expire"
     ],
-    answer: `<p>REPLACE WITH YOUR ANSWER about expiration.</p>`
+    answer: `<p>The <strong>expiration date</strong> is the last day the option is valid. After this date, the buyer can no longer use the option to sell the asset at the strike price.</p>`
   },
   {
     keywords: [
-      "what is the premium",
-      "how much does a put option cost",
-      "option premium",
-      "premium",
-      "cost of a put option"
+      "And who is considered the buyer?"
     ],
-    answer: `<p>REPLACE WITH YOUR ANSWER about premiums.</p>`
+    answer: `<p>The <strong>buyer</strong> is the person who pays the premium to get the right to sell the asset at the strike price.</p>`
+  },
+  {
+    keywords: [
+      "Please define what the premium is.",
+      "what is the premium",
+      "define premium",
+      "option premium"
+    ],
+    answer: `<p>The <strong>premium</strong> is the price that the buyer pays the seller to purchase the option.</p>`
+  },
+  {
+    keywords: [
+      "So who is the seller?"
+    ],
+    answer: `<p>The <strong>seller</strong> is the person who receives the premium and agrees to buy the asset at the strike price if the buyer exercises the option.</p>`
+  },
+  {
+    keywords: [
+      "So I'm guessing that there are benefits to put options, what are they?"
+    ],
+    answer: `<p>Absolutely! Put options protect against falling prices, limit potential losses, and allow investors to profit from price decreases.</p>`
+  },
+  {
+    keywords: [
+      "And why are they important in financial management?"
+    ],
+    answer: `<p>Put options are primarily used by financial managers and investors for <strong>hedging</strong>.</p>`
+  },
+  {
+    keywords: [
+      "I don't understand what hedging means. Please explain."
+    ],
+    answer: `<p><strong>Hedging</strong> is a way to reduce the risk of losing money by using financial contracts to protect against unfavorable changes in market prices.</p>`
+  },
+  {
+    keywords: [
+      "So what are the downsides of put options?"
+    ],
+    answer: `<p>The main limitations and risks are that put options cost a premium, can expire worthless, and only provide protection until their expiration date.</p>`
+  },
+  {
+    keywords: [
+      "So if I were to buy a put option. What risks could I face?"
+    ],
+    answer: `<p>As the buyer, you can lose the premium if the option expires worthless or loses value before expiration.</p>`
+  },
+  {
+    keywords: [
+      "And what risks does the seller face?"
+    ],
+    answer: `<p>The seller keeps the premium but may have to buy the asset at the strike price, even if its market price drops sharply.</p>`
+  },
+  {
+    keywords: [
+      "What restrictions apply to put options?"
+    ],
+    answer: `<p>Brokers must approve you to trade options based on your experience and financial situation. Selling put options may require a special account and extra funds to cover losses.</p>`
+  },
+  {
+    keywords: [
+      "So that means that they are regulated?"
+    ],
+    answer: `<p>Yes. Exchange-traded options are standardized and backed by a clearing house, which guarantees the trade so neither side has to worry the other won't pay.</p>`
+  },
+  {
+    keywords: [
+      "So if I wanted to buy put options, what can I do to mitigate the risks?"
+    ],
+    answer: `<p>As a buyer, you should only spend money you can afford to lose, choose an expiration date that gives you enough time, and have a plan for when to sell.</p>`
+  },
+  {
+    keywords: [
+      "And as a seller? How do I manage the risks?"
+    ],
+    answer: `<p>As a seller you should keep enough money to buy the shares, choose stocks you are willing to own, and diversify your investments.</p>`
+  },
+  {
+    keywords: [
+      "I'm almost certain I understand it now, but can you give me a practical example so I can understand it even better?"
+    ],
+    answer: `<p>Absolutely! Say a person buys a put option on 100 shares worth $50 each, with a strike price of $45 and a $200 premium. If the share price falls to $30, they can still sell the shares for $45 each, protecting themselves from losses. If the price rises, they can let the option expire, losing only the $200 premium.</p>`
   }
-
 ];
 
 /* ===================================================== */
@@ -566,6 +649,7 @@ function addUser(text) {
 function normalize(text) {
   return text
     .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
     .replace(/[^a-z0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
