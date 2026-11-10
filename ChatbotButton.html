@@ -425,7 +425,6 @@
             </svg>
           </button>
         </form>
-        <div class="chat-hint">Press the <strong>→ right arrow key</strong> to show the next question, or type your own question above.</div>
         <div class="chat-spacer"></div>
       </div>
     </div>
@@ -500,6 +499,55 @@ const QA = [
   },
   {
     keywords: [
+      "So how do I know whether a put option is actually worth using? Is there a way to describe that?",
+      "in the money",
+      "at the money",
+      "out of the money",
+      "itm atm otm"
+    ],
+    answer: `<ul>
+               <li><strong>In the money:</strong> the stock price is <em>below</em> the strike price. Selling at the strike beats the market, so the put is worth using.</li>
+               <li><strong>At the money:</strong> the stock price is <em>equal</em> to the strike price.</li>
+               <li><strong>Out of the money:</strong> the stock price is <em>above</em> the strike price. You could just sell at the market, so the put isn't worth using.</li>
+             </ul>`
+  },
+  {
+    keywords: [
+      "What does it mean to 'exercise' a put option?",
+      "what does exercise mean",
+      "exercise a put option",
+      "exercising an option"
+    ],
+    answer: `<p>To <strong>exercise</strong> an option means to use your right and sell the asset at the strike price. You normally only do this when the put is in the money. If it isn't, you simply let it expire.</p>`
+  },
+  {
+    keywords: [
+      "What's the difference between intrinsic value and time value?",
+      "intrinsic value",
+      "time value"
+    ],
+    answer: `<ul>
+               <li><strong>Intrinsic value</strong> is how far in the money the option is: the strike price minus the stock price. If it's out of the money, this part is zero.</li>
+               <li><strong>Time value</strong> is the extra amount buyers pay for the chance that the price moves in their favor before expiration. It shrinks as the expiration date gets closer.</li>
+             </ul>`
+  },
+  {
+    keywords: [
+      "What affects the price of a put option?",
+      "what affects the premium",
+      "what determines the price of a put option",
+      "put option pricing"
+    ],
+    answer: `<p>Four main things move the price of a put option:</p>
+             <ul>
+               <li><strong>Stock price:</strong> the lower the stock price, the more valuable the put.</li>
+               <li><strong>Strike price:</strong> a higher strike price makes the put more valuable.</li>
+               <li><strong>Time left:</strong> more time until expiration means a higher price, because there is more chance for the stock to fall.</li>
+               <li><strong>Volatility:</strong> the more a stock jumps around, the more the put costs.</li>
+             </ul>`
+  },
+  {
+    keywords: [
       "So I'm guessing that there are benefits to put options, what are they?"
     ],
     answer: `<p>Absolutely! Put options protect against falling prices, limit potential losses, and allow investors to profit from price decreases.</p>`
@@ -518,6 +566,42 @@ const QA = [
   },
   {
     keywords: [
+      "So how does someone actually hedge with a put? What is a protective put?",
+      "protective put",
+      "what is a protective put"
+    ],
+    answer: `<p>A <strong>protective put</strong> means owning a stock and buying a put option on that same stock. It works like insurance on something you already own.</p>
+             <p>For example, if you own shares worth $50 and buy a put with a $45 strike price, the most you can lose per share on the price drop is $5, no matter how far the stock falls. You also pay the premium for that protection.</p>`
+  },
+  {
+    keywords: [
+      "Can someone use puts without owning the stock, just to make money?",
+      "speculation",
+      "speculate with put options",
+      "buy a put for speculation"
+    ],
+    answer: `<p>Yes. This is called <strong>speculation</strong>. An investor who thinks a stock's price will fall can buy a put without owning the stock.</p>
+             <ul>
+               <li>If the price falls far enough below the strike price, the put gains value and the investor profits.</li>
+               <li>If the price doesn't fall, the investor loses the premium.</li>
+             </ul>
+             <p>It is riskier than hedging because there is no stock to protect.</p>`
+  },
+  {
+    keywords: [
+      "How is that different from short selling?",
+      "put option vs short selling",
+      "short selling",
+      "what is short selling"
+    ],
+    answer: `<p>Both can profit from a falling price, but the risk is very different.</p>
+             <ul>
+               <li><strong>Short selling:</strong> you borrow shares, sell them, and hope to buy them back cheaper. If the price rises instead, your losses can keep growing.</li>
+               <li><strong>Buying a put:</strong> the most you can lose is the premium you paid.</li>
+             </ul>`
+  },
+  {
+    keywords: [
       "So what are the downsides of put options?"
     ],
     answer: `<p>The main limitations and risks are that put options cost a premium, can expire worthless, and only provide protection until their expiration date.</p>`
@@ -533,6 +617,24 @@ const QA = [
       "And what risks does the seller face?"
     ],
     answer: `<p>The seller keeps the premium but may have to buy the asset at the strike price, even if its market price drops sharply.</p>`
+  },
+  {
+    keywords: [
+      "How do I figure out whether I made money on a put?",
+      "breakeven",
+      "break even price",
+      "how to calculate profit on a put"
+    ],
+    answer: `<p>Start with the <strong>breakeven price</strong>: the strike price minus the premium per share. The stock has to fall below this price for the buyer to make a profit.</p>
+             <p>For example, with a $45 strike and a $2 premium per share, the breakeven is $43. If the stock falls to $40, the profit is $3 per share ($45 - $40 - $2), or $300 for 100 shares. If the stock stays above $45, the buyer loses only the $2 per share premium ($200).</p>`
+  },
+  {
+    keywords: [
+      "Do I have to hold the option until it expires?",
+      "sell the put before expiration",
+      "sell a put option early"
+    ],
+    answer: `<p>No. A buyer can sell the option to another investor at any time before it expires. Its price rises and falls with the stock price and the time left, so many investors sell their puts for a profit instead of exercising them.</p>`
   },
   {
     keywords: [
@@ -563,6 +665,26 @@ const QA = [
       "I'm almost certain I understand it now, but can you give me a practical example so I can understand it even better?"
     ],
     answer: `<p>Absolutely! Say a person buys a put option on 100 shares worth $50 each, with a strike price of $45 and a $200 premium. If the share price falls to $30, they can still sell the shares for $45 each, protecting themselves from losses. If the price rises, they can let the option expire, losing only the $200 premium.</p>`
+  },
+  {
+    keywords: [
+      "That helped with the buyer. Can you show me an example from the seller's side?",
+      "seller example",
+      "example for the seller"
+    ],
+    answer: `<p>Sure! Using the same put option, the seller receives the $200 premium.</p>
+             <ul>
+               <li>If the stock stays above $45, say at $50, the option expires worthless and the seller keeps the $200.</li>
+               <li>If the stock falls to $30, the seller must buy 100 shares at $45 ($4,500) that are only worth $3,000. That is a $1,500 loss, reduced to $1,300 by the $200 premium.</li>
+             </ul>`
+  },
+  {
+    keywords: [
+      "Can I trade put options in Belize?",
+      "put options in belize",
+      "trade options in belize"
+    ],
+    answer: `<p>Not directly through a local market, at least for now. Belize does not currently have a stock exchange, and options are normally traded on exchanges.</p>`
   }
 ];
 
@@ -711,16 +833,13 @@ function findAnswer(text) {
     : `<p>${FALLBACK}</p>`;
 }
 
-async function ask(text) {
-  if (isReplyPending) return;
+// Holds the answer for a prepared question until the right arrow is pressed again.
+let pendingAnswer = null;
+
+// Show the chatbot's loading dots for one second, then reveal the answer.
+function revealAnswer(html) {
   isReplyPending = true;
 
-  const questionBubble = addUser(text);
-
-  // First, animate the question as if it is being typed.
-  await typeQuestion(questionBubble, text);
-
-  // Then show the chatbot's thinking animation for one second.
   const typing = addBot(
     `<span class="chat-typing"><i></i><i></i><i></i></span>`,
     false
@@ -728,24 +847,65 @@ async function ask(text) {
 
   setTimeout(() => {
     typing.remove();
-    addBot(findAnswer(text));
+    addBot(html);
     isReplyPending = false;
   }, 1000);
 }
 
-// Show the prepared questions in the same order they appear in the QA list.
+// Show a pending answer immediately (used if someone types their own question first).
+function flushPendingAnswer() {
+  if (pendingAnswer === null) return;
+  addBot(pendingAnswer);
+  pendingAnswer = null;
+}
+
+// Typed questions: the question types out, then the answer appears after the loading dots.
+async function ask(text) {
+  if (isReplyPending) return;
+  isReplyPending = true;
+
+  flushPendingAnswer();
+
+  const questionBubble = addUser(text);
+
+  // First, animate the question as if it is being typed.
+  await typeQuestion(questionBubble, text);
+
+  // Then show the chatbot's thinking animation for one second.
+  revealAnswer(findAnswer(text));
+}
+
+// Prepared questions: the question types out and then waits for another right arrow press.
+async function askPrepared(text) {
+  if (isReplyPending) return;
+  isReplyPending = true;
+
+  const questionBubble = addUser(text);
+  await typeQuestion(questionBubble, text);
+
+  // Keep the answer ready; the next right arrow press reveals it.
+  pendingAnswer = findAnswer(text);
+  isReplyPending = false;
+}
+
+// Right arrow flow: question, then answer, then next question, and so on.
 function showNextQuestion() {
   if (isReplyPending) return;
 
-  if (nextQuestionIndex >= QA.length) {
-    addBot("<p>That is the end of the prepared questions. You can still type your own questions below.</p>");
+  // If a question is waiting for its answer, show the answer now.
+  if (pendingAnswer !== null) {
+    const answer = pendingAnswer;
+    pendingAnswer = null;
+    revealAnswer(answer);
     return;
   }
+
+  if (nextQuestionIndex >= QA.length) return;
 
   // The first keyword in each entry is the exact question to display.
   const question = QA[nextQuestionIndex].keywords[0];
   nextQuestionIndex++;
-  ask(question);
+  askPrepared(question);
 }
 
 // Use the right arrow to advance during the presentation.
