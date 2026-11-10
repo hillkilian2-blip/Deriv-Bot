@@ -321,6 +321,13 @@
     height: 24px;
   }
 
+  .chat-hint {
+    padding: 7px 4px 0;
+    color: var(--chat-muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
   .chat-spacer {
     height: 12px;
   }
@@ -418,6 +425,7 @@
             </svg>
           </button>
         </form>
+        <div class="chat-hint">Press the <strong>→ right arrow key</strong> to show the next question, or type your own question above.</div>
         <div class="chat-spacer"></div>
       </div>
     </div>
@@ -564,6 +572,10 @@ const $messages = document.getElementById("chat-messages");
 const $input = document.getElementById("chat-input");
 const $form = document.getElementById("chat-form");
 
+// Tracks which prepared question will be shown next when the right arrow is pressed.
+let nextQuestionIndex = 0;
+let isReplyPending = false;
+
 const ROBOT = `<svg viewBox="0 0 40 40" aria-hidden="true">
   <circle cx="20" cy="6" r="2.2" fill="#00aedb"/>
   <rect x="19" y="6" width="2" height="5" fill="#8fa3b8"/>
@@ -639,11 +651,31 @@ function addUser(text) {
 
   const bubble = document.createElement("div");
   bubble.className = "chat-user-bubble";
-  bubble.textContent = text;
+  bubble.textContent = "";
 
   el.appendChild(bubble);
   $messages.appendChild(el);
   scrollChat();
+
+  return bubble;
+}
+
+// Reveal the user's question one character at a time.
+function typeQuestion(bubble, text, speed = 25) {
+  return new Promise((resolve) => {
+    let position = 0;
+
+    const typingInterval = setInterval(() => {
+      bubble.textContent += text.charAt(position);
+      position++;
+      scrollChat();
+
+      if (position >= text.length) {
+        clearInterval(typingInterval);
+        resolve();
+      }
+    }, speed);
+  });
 }
 
 function normalize(text) {
@@ -679,9 +711,16 @@ function findAnswer(text) {
     : `<p>${FALLBACK}</p>`;
 }
 
-function ask(text) {
-  addUser(text);
+async function ask(text) {
+  if (isReplyPending) return;
+  isReplyPending = true;
 
+  const questionBubble = addUser(text);
+
+  // First, animate the question as if it is being typed.
+  await typeQuestion(questionBubble, text);
+
+  // Then show the chatbot's thinking animation for one second.
   const typing = addBot(
     `<span class="chat-typing"><i></i><i></i><i></i></span>`,
     false
@@ -690,8 +729,43 @@ function ask(text) {
   setTimeout(() => {
     typing.remove();
     addBot(findAnswer(text));
-  }, 400);
+    isReplyPending = false;
+  }, 1000);
 }
+
+// Show the prepared questions in the same order they appear in the QA list.
+function showNextQuestion() {
+  if (isReplyPending) return;
+
+  if (nextQuestionIndex >= QA.length) {
+    addBot("<p>That is the end of the prepared questions. You can still type your own questions below.</p>");
+    return;
+  }
+
+  // The first keyword in each entry is the exact question to display.
+  const question = QA[nextQuestionIndex].keywords[0];
+  nextQuestionIndex++;
+  ask(question);
+}
+
+// Use the right arrow to advance during the presentation.
+// If the input contains text, the arrow key works normally so you can edit it.
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "ArrowRight") return;
+
+  const chatIsVisible =
+    document.getElementById("chat-section").style.display !== "none";
+
+  if (!chatIsVisible || event.altKey || event.ctrlKey || event.metaKey) return;
+
+  const typingInInput =
+    event.target === $input && $input.value.length > 0;
+
+  if (typingInInput) return;
+
+  event.preventDefault();
+  showNextQuestion();
+});
 
 $form.addEventListener("submit", (event) => {
   event.preventDefault();
