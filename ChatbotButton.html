@@ -74,10 +74,6 @@
     cursor: not-allowed;
   }
 
-
-
-
-
   .topic-name {
     display: block;
     font-size: 14px;
@@ -90,7 +86,6 @@
     font-weight: normal;
     color: #566176;
   }
-
 
   .carousel {
     position: relative;
@@ -586,16 +581,16 @@ const QA = [
       "what are put options",
       "define put option"
     ],
-    answer: `<p>A <strong>put option</strong> is a contract that gives the buyer the right, but not the obligation, to sell an asset at the strike price by the expiration date.</p>`
+    answer: `<p>A contract that gives the buyer the right, but not the obligation, to sell an asset at the strike price by the expiration date</p>`
   },
   {
     keywords: [
       "And how does a put option work?"
     ],
-    answer: `<p>A put option is like insurance for a stock you own: you pay a fee for the right to sell it at a set price.</p>
+    answer: `<p>Like insurance for a stock you own</p>
              <ul>
-               <li>If the stock drops below that price, you use the put and sell at the higher price and you're protected.</li>
-               <li>If the stock rises, you skip the put and sell at the market price and you only lose the fee.</li>
+               <li>Stock falls: use the put, sell at the higher strike price</li>
+               <li>Stock rises: skip the put, sell at market, lose only the fee</li>
              </ul>`
   },
   {
@@ -605,7 +600,7 @@ const QA = [
       "strike price",
       "define strike price"
     ],
-    answer: `<p>The <strong>strike price</strong> is the agreed price at which the buyer can sell the asset using a put option.</p>`
+    answer: `<p>The agreed selling price stated in the contract</p>`
   },
   {
     keywords: [
@@ -614,13 +609,13 @@ const QA = [
       "expiration date",
       "when does a put option expire"
     ],
-    answer: `<p>The <strong>expiration date</strong> is the last day the option is valid. After this date, the buyer can no longer use the option to sell the asset at the strike price.</p>`
+    answer: `<p>Last day the option is valid. After it, the right to sell is gone.</p>`
   },
   {
     keywords: [
       "And who is considered the buyer?"
     ],
-    answer: `<p>The <strong>buyer</strong> is the person who pays the premium to get the right to sell the asset at the strike price.</p>`
+    answer: `<p>The buyer pays the premium and gets the right to sell at the strike price</p>`
   },
   {
     keywords: [
@@ -629,13 +624,13 @@ const QA = [
       "define premium",
       "option premium"
     ],
-    answer: `<p>The <strong>premium</strong> is the price that the buyer pays the seller to purchase the option.</p>`
+    answer: `<p>The premium is the price the buyer pays the seller and is paid upfront for the option.</p>`
   },
   {
     keywords: [
       "So who is the seller?"
     ],
-    answer: `<p>The <strong>seller</strong> is the person who receives the premium and agrees to buy the asset at the strike price if the buyer exercises the option.</p>`
+    answer: `<p>The seller receives the premium and must buy the asset at the strike price if the buyer exercises.</p>`
   },
   {
     keywords: [
@@ -646,9 +641,9 @@ const QA = [
       "itm atm otm"
     ],
     answer: `<ul>
-               <li><strong>In the money:</strong> the stock price is <em>below</em> the strike price. Selling at the strike beats the market, so the put is worth using.</li>
-               <li><strong>At the money:</strong> the stock price is <em>equal</em> to the strike price.</li>
-               <li><strong>Out of the money:</strong> the stock price is <em>above</em> the strike price. You could just sell at the market, so the put isn't worth using.</li>
+               <li><strong>In the money:</strong> stock price below strike, worth using</li>
+               <li><strong>At the money:</strong> stock price equals strike</li>
+               <li><strong>Out of the money:</strong> stock price above strike, not worth using</li>
              </ul>`
   },
   {
@@ -658,18 +653,7 @@ const QA = [
       "exercise a put option",
       "exercising an option"
     ],
-    answer: `<p>To <strong>exercise</strong> an option means to use your right and sell the asset at the strike price. You normally only do this when the put is in the money. If it isn't, you simply let it expire.</p>`
-  },
-  {
-    keywords: [
-      "What's the difference between intrinsic value and time value?",
-      "intrinsic value",
-      "time value"
-    ],
-    answer: `<ul>
-               <li><strong>Intrinsic value</strong> is how far in the money the option is: the strike price minus the stock price. If it's out of the money, this part is zero.</li>
-               <li><strong>Time value</strong> is the extra amount buyers pay for the chance that the price moves in their favor before expiration. It shrinks as the expiration date gets closer.</li>
-             </ul>`
+    answer: `<p>It means using your right to sell at the strike price. This is generally worthwhile when the option is in the money, otherwise, let it expire</p>`
   },
   {
     keywords: [
@@ -678,40 +662,31 @@ const QA = [
       "what determines the price of a put option",
       "put option pricing"
     ],
-    answer: `<p>Four main things move the price of a put option:</p>
-             <ul>
-               <li><strong>Stock price:</strong> the lower the stock price, the more valuable the put.</li>
-               <li><strong>Strike price:</strong> a higher strike price makes the put more valuable.</li>
-               <li><strong>Time left:</strong> more time until expiration means a higher price, because there is more chance for the stock to fall.</li>
-               <li><strong>Volatility:</strong> the more a stock jumps around, the more the put costs.</li>
+    answer: `<ul>
+               <li><strong>Stock price:</strong> lower = more valuable</li>
+               <li><strong>Strike price:</strong> higher = more valuable</li>
+               <li><strong>Time left:</strong> more time = higher price</li>
+               <li><strong>Volatility:</strong> bigger swings = higher price</li>
              </ul>`
   },
   {
     keywords: [
       "So I'm guessing that there are benefits to put options, what are they?"
     ],
-    answer: `<p>Absolutely! Put options protect against falling prices, limit potential losses, and allow investors to profit from price decreases.</p>`
+    answer: `<p>Protect against falling prices, helps limit potential losses, and allows for profiting from price decreases.</p>`
   },
   {
     keywords: [
       "And why are they important in financial management?"
     ],
-    answer: `<p>Put options are primarily used by financial managers and investors for <strong>hedging</strong>.</p>`
+    answer: `<p>Mainly used for hedging.</p>`
   },
   {
     keywords: [
       "I don't understand what hedging means. Please explain."
     ],
-    answer: `<p><strong>Hedging</strong> is a way to reduce the risk of losing money by using financial contracts to protect against unfavorable changes in market prices.</p>`
-  },
-  {
-    keywords: [
-      "So how does someone actually hedge with a put? What is a protective put?",
-      "protective put",
-      "what is a protective put"
-    ],
-    answer: `<p>A <strong>protective put</strong> means owning a stock and buying a put option on that same stock. It works like insurance on something you already own.</p>
-             <p>For example, if you own shares worth $50 and buy a put with a $45 strike price, the most you can lose per share on the price drop is $5, no matter how far the stock falls. You also pay the premium for that protection.</p>`
+    answer: `<p>Reducing the risk of loss</p>
+             <p>Using contracts to protect against bad price moves</p>`
   },
   {
     keywords: [
@@ -720,12 +695,7 @@ const QA = [
       "speculate with put options",
       "buy a put for speculation"
     ],
-    answer: `<p>Yes. This is called <strong>speculation</strong>. An investor who thinks a stock's price will fall can buy a put without owning the stock.</p>
-             <ul>
-               <li>If the price falls far enough below the strike price, the put gains value and the investor profits.</li>
-               <li>If the price doesn't fall, the investor loses the premium.</li>
-             </ul>
-             <p>It is riskier than hedging because there is no stock to protect.</p>`
+    answer: `<p>Yes. This is called speculation.</p>`
   },
   {
     keywords: [
@@ -734,29 +704,29 @@ const QA = [
       "short selling",
       "what is short selling"
     ],
-    answer: `<p>Both can profit from a falling price, but the risk is very different.</p>
-             <ul>
-               <li><strong>Short selling:</strong> you borrow shares, sell them, and hope to buy them back cheaper. If the price rises instead, your losses can keep growing.</li>
-               <li><strong>Buying a put:</strong> the most you can lose is the premium you paid.</li>
-             </ul>`
+    answer: `<p><strong>Short selling:</strong> borrow shares, sell, hope to buy back cheaper; losses can keep growing if the price rises</p>`
   },
   {
     keywords: [
       "So what are the downsides of put options?"
     ],
-    answer: `<p>The main limitations and risks are that put options cost a premium, can expire worthless, and only provide protection until their expiration date.</p>`
+    answer: `<ul>
+               <li>Cost a premium</li>
+               <li>Can expire worthless</li>
+               <li>Protection ends at expiration</li>
+             </ul>`
   },
   {
     keywords: [
       "So if I were to buy a put option. What risks could I face?"
     ],
-    answer: `<p>As the buyer, you can lose the premium if the option expires worthless or loses value before expiration.</p>`
+    answer: `<p>The main risk is losing the premium if the option expires worthless or loses value before expiration.</p>`
   },
   {
     keywords: [
       "And what risks does the seller face?"
     ],
-    answer: `<p>The seller keeps the premium but may have to buy the asset at the strike price, even if its market price drops sharply.</p>`
+    answer: `<p>The seller keeps the premium but may be required to buy the asset at the strike price, even if its market value has fallen significantly.</p>`
   },
   {
     keywords: [
@@ -765,8 +735,13 @@ const QA = [
       "break even price",
       "how to calculate profit on a put"
     ],
-    answer: `<p>Start with the <strong>breakeven price</strong>: the strike price minus the premium per share. The stock has to fall below this price for the buyer to make a profit.</p>
-             <p>For example, with a $45 strike and a $2 premium per share, the breakeven is $43. If the stock falls to $40, the profit is $3 per share ($45 - $40 - $2), or $300 for 100 shares. If the stock stays above $45, the buyer loses only the $2 per share premium ($200).</p>`
+    answer: `<p><strong>Breakeven = strike price minus premium</strong></p>
+             <p>Stock must fall below breakeven for the buyer to profit</p>
+             <ul>
+               <li>Example: $45 strike, $2 premium, breakeven $43</li>
+               <li>Stock at $40: profit of $3/share ($300 per 100 shares)</li>
+               <li>Stock stays above $45: the buyer loses the $200 premium if the option expires worthless.</li>
+             </ul>`
   },
   {
     keywords: [
@@ -774,37 +749,46 @@ const QA = [
       "sell the put before expiration",
       "sell a put option early"
     ],
-    answer: `<p>No. A buyer can sell the option to another investor at any time before it expires. Its price rises and falls with the stock price and the time left, so many investors sell their puts for a profit instead of exercising them.</p>`
+    answer: `<p>No. You can sell the option to another investor before expiration.</p>`
   },
   {
     keywords: [
       "What restrictions apply to put options?"
     ],
-    answer: `<p>Brokers must approve you to trade options based on your experience and financial situation. Selling put options may require a special account and extra funds to cover losses.</p>`
+    answer: `<ul>
+               <li>Broker approval required</li>
+               <li>Based on your experience and finances</li>
+               <li>Selling puts may need a special account and extra funds</li>
+             </ul>`
   },
   {
     keywords: [
       "So that means that they are regulated?"
     ],
-    answer: `<p>Yes. Exchange-traded options are standardized and backed by a clearing house, which guarantees the trade so neither side has to worry the other won't pay.</p>`
+    answer: `<p>Yes, exchange-traded options are standardized and a clearing house guarantees the trade.</p>`
   },
   {
     keywords: [
       "So if I wanted to buy put options, what can I do to mitigate the risks?"
     ],
-    answer: `<p>As a buyer, you should only spend money you can afford to lose, choose an expiration date that gives you enough time, and have a plan for when to sell.</p>`
+    answer: `<p>Only risk money you can afford to lose.</p>`
   },
   {
     keywords: [
       "And as a seller? How do I manage the risks?"
     ],
-    answer: `<p>As a seller you should keep enough money to buy the shares, choose stocks you are willing to own, and diversify your investments.</p>`
+    answer: `<p>Keep enough money to buy the shares</p>`
   },
   {
     keywords: [
       "I'm almost certain I understand it now, but can you give me a practical example so I can understand it even better?"
     ],
-    answer: `<p>Absolutely! Say a person buys a put option on 100 shares worth $50 each, with a strike price of $45 and a $200 premium. If the share price falls to $30, they can still sell the shares for $45 each, protecting themselves from losses. If the price rises, they can let the option expire, losing only the $200 premium.</p>`
+    answer: `<ul>
+               <li>100 shares at $50 each</li>
+               <li>Put with $45 strike, $200 premium</li>
+               <li>Stock falls to $30: still sell at $45</li>
+               <li>Stock rises: let it expire, lose only the $200</li>
+             </ul>`
   },
   {
     keywords: [
@@ -812,10 +796,11 @@ const QA = [
       "seller example",
       "example for the seller"
     ],
-    answer: `<p>Sure! Using the same put option, the seller receives the $200 premium.</p>
-             <ul>
-               <li>If the stock stays above $45, say at $50, the option expires worthless and the seller keeps the $200.</li>
-               <li>If the stock falls to $30, the seller must buy 100 shares at $45 ($4,500) that are only worth $3,000. That is a $1,500 loss, reduced to $1,300 by the $200 premium.</li>
+    answer: `<ul>
+               <li>Seller receives the $200 premium</li>
+               <li>Stock stays above $45 (say $50): seller keeps the $200</li>
+               <li>Stock falls to $30: seller buys 100 shares at $45 ($4,500) worth $3,000</li>
+               <li>Loss of $1,500, reduced to $1,300 by the premium</li>
              </ul>`
   },
   {
@@ -824,7 +809,7 @@ const QA = [
       "put options in belize",
       "trade options in belize"
     ],
-    answer: `<p>Not directly through a local market, at least for now. Belize does not currently have a stock exchange, and options are normally traded on exchanges.</p>`
+    answer: `<p>Not directly through a local market, for now.</p>`
   }
 ];
 
@@ -834,7 +819,6 @@ const $messages = document.getElementById("chat-messages");
 const $input = document.getElementById("chat-input");
 const $form = document.getElementById("chat-form");
 
-// Tracks which prepared question will be shown next when the right arrow is pressed.
 let nextQuestionIndex = 0;
 let isReplyPending = false;
 
@@ -922,7 +906,6 @@ function addUser(text) {
   return bubble;
 }
 
-// Reveal the user's question one character at a time.
 function typeQuestion(bubble, text, speed = 25) {
   return new Promise((resolve) => {
     let position = 0;
@@ -973,10 +956,8 @@ function findAnswer(text) {
     : `<p>${FALLBACK}</p>`;
 }
 
-// Holds the answer for a prepared question until the right arrow is pressed again.
 let pendingAnswer = null;
 
-// Show the chatbot's loading dots for one second, then reveal the answer.
 function revealAnswer(html) {
   isReplyPending = true;
 
@@ -992,14 +973,12 @@ function revealAnswer(html) {
   }, 1000);
 }
 
-// Show a pending answer immediately (used if someone types their own question first).
 function flushPendingAnswer() {
   if (pendingAnswer === null) return;
   addBot(pendingAnswer);
   pendingAnswer = null;
 }
 
-// Typed questions: the question types out, then the answer appears after the loading dots.
 async function ask(text) {
   if (isReplyPending) return;
   isReplyPending = true;
@@ -1007,15 +986,10 @@ async function ask(text) {
   flushPendingAnswer();
 
   const questionBubble = addUser(text);
-
-  // First, animate the question as if it is being typed.
   await typeQuestion(questionBubble, text);
-
-  // Then show the chatbot's thinking animation for one second.
   revealAnswer(findAnswer(text));
 }
 
-// Prepared questions: the question types out and then waits for another right arrow press.
 async function askPrepared(text) {
   if (isReplyPending) return;
   isReplyPending = true;
@@ -1023,16 +997,13 @@ async function askPrepared(text) {
   const questionBubble = addUser(text);
   await typeQuestion(questionBubble, text);
 
-  // Keep the answer ready; the next right arrow press reveals it.
   pendingAnswer = findAnswer(text);
   isReplyPending = false;
 }
 
-// Right arrow flow: question, then answer, then next question, and so on.
 function showNextQuestion() {
   if (isReplyPending) return;
 
-  // If a question is waiting for its answer, show the answer now.
   if (pendingAnswer !== null) {
     const answer = pendingAnswer;
     pendingAnswer = null;
@@ -1042,14 +1013,11 @@ function showNextQuestion() {
 
   if (nextQuestionIndex >= QA.length) return;
 
-  // The first keyword in each entry is the exact question to display.
   const question = QA[nextQuestionIndex].keywords[0];
   nextQuestionIndex++;
   askPrepared(question);
 }
 
-// Use the right arrow to advance during the presentation.
-// If the input contains text, the arrow key works normally so you can edit it.
 document.addEventListener("keydown", (event) => {
   if (event.key !== "ArrowRight") return;
 
@@ -1128,10 +1096,6 @@ function hideChatbot() {
 
 addBot(`<p>${GREETING}</p>`, false);
 
-/* ===== Picture carousel (shown under the topic buttons) =====
-   Put your pictures in the same folder as this file and name them as below,
-   or change the "image" paths. If a picture is missing, a colored slide with
-   the caption is shown instead. */
 const CAROUSEL_SECONDS = 4;
 const SLIDES = [
   { image: "explained.png", caption: "Protect your investments when prices fall",  color: "linear-gradient(135deg,#101D3A,#2a4a7f)" },
