@@ -36,13 +36,18 @@
 
   .topic-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
+    max-width: 540px;
+    margin: 0 auto;
   }
 
   .topic-button {
-    min-height: 50px;
-    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    min-height: 58px;
+    padding: 10px 16px;
     border: 1px solid #101D3A;
     border-radius: 10px;
     background: #FFFFFF;
@@ -68,6 +73,25 @@
     opacity: 0.85;
     cursor: not-allowed;
   }
+
+
+
+
+
+  .topic-name {
+    display: block;
+    font-size: 14px;
+  }
+
+  .topic-desc {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: normal;
+    color: #566176;
+  }
+
+
 
   #chat-section {
     display: none;
@@ -342,12 +366,16 @@
     }
 
     .topic-grid {
-      grid-template-columns: 1fr;
       gap: 8px;
     }
 
     .topic-button {
-      min-height: 45px;
+      min-height: 58px;
+      padding: 8px 12px;
+    }
+
+    .topic-desc {
+      display: none;
     }
 
     .chat-app {
@@ -380,18 +408,32 @@
     <div class="heading">Choose a Derivative to start learning.</div>
 
     <div class="topic-grid">
-      <button class="topic-button" disabled>Futures</button>
-      <button class="topic-button" disabled>Currency Swaps</button>
-      <button class="topic-button" disabled>Call Options</button>
-      <button class="topic-button" disabled>Interest Rate Swaps</button>
-      <button class="topic-button" disabled>Forwards</button>
-
       <button
         class="topic-button active"
         type="button"
         onclick="showChatbot()"
       >
-        Put Options
+        <span class="topic-text"><span class="topic-name">Put Options</span><span class="topic-desc">The right to sell at a set price</span></span>
+      </button>
+
+      <button class="topic-button" disabled>
+        <span class="topic-text"><span class="topic-name">Call Options</span><span class="topic-desc">The right to buy at a set price</span></span>
+      </button>
+
+      <button class="topic-button" disabled>
+        <span class="topic-text"><span class="topic-name">Forwards</span><span class="topic-desc">A custom deal to buy or sell later</span></span>
+      </button>
+
+      <button class="topic-button" disabled>
+        <span class="topic-text"><span class="topic-name">Futures</span><span class="topic-desc">Agree today to buy or sell on a future date</span></span>
+      </button>
+
+      <button class="topic-button" disabled>
+        <span class="topic-text"><span class="topic-name">Currency Swaps</span><span class="topic-desc">Exchange one currency for another, then swap back</span></span>
+      </button>
+
+      <button class="topic-button" disabled>
+        <span class="topic-text"><span class="topic-name">Interest Rate Swaps</span><span class="topic-desc">Trade fixed interest payments for changing ones</span></span>
       </button>
     </div>
   </div>
