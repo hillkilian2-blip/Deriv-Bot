@@ -93,6 +93,100 @@
 
 
 
+  /* Picture carousel under the topic buttons */
+
+  .carousel {
+    position: relative;
+    max-width: 540px;
+    margin: 22px auto 0;
+    aspect-ratio: 2 / 1;
+    border: 2px solid #101D3A;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #101D3A;
+    text-align: left;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+  }
+
+  .slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 34px 56px 26px 18px;
+    background: linear-gradient(to top, rgba(16, 29, 58, 0.85), rgba(16, 29, 58, 0));
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.3;
+  }
+
+  .car-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: 2px solid #101D3A;
+    border-radius: 50%;
+    background: #FFFBD3;
+    color: #101D3A;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .car-btn:hover {
+    background: #F5EFB8;
+  }
+
+  .car-btn.prev { left: 10px; }
+  .car-btn.next { right: 10px; }
+
+  .car-dots {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .car-dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .car-dots i.on {
+    background: #ffffff;
+  }
+
+  .car-btn:focus-visible {
+    outline: 3px solid #00aedb;
+    outline-offset: 2px;
+  }
+
   #chat-section {
     display: none;
     margin-top: 20px;
@@ -435,6 +529,13 @@
       <button class="topic-button" disabled>
         <span class="topic-text"><span class="topic-name">Interest Rate Swaps</span><span class="topic-desc">Trade fixed interest payments for changing ones</span></span>
       </button>
+    </div>
+
+    <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Featured pictures">
+      <div id="slides"></div>
+      <button class="car-btn prev" id="car-prev" type="button" aria-label="Previous picture">&#8249;</button>
+      <button class="car-btn next" id="car-next" type="button" aria-label="Next picture">&#8250;</button>
+      <div class="car-dots" id="car-dots"></div>
     </div>
   </div>
 
@@ -1029,6 +1130,77 @@ function hideChatbot() {
 }
 
 addBot(`<p>${GREETING}</p>`, false);
+
+/* ===== Picture carousel (shown under the topic buttons) =====
+   Put your pictures in the same folder as this file and name them as below,
+   or change the "image" paths. If a picture is missing, a colored slide with
+   the caption is shown instead. */
+const CAROUSEL_SECONDS = 4;
+const SLIDES = [
+  { image: "explained.png", caption: "Protect your investments when prices fall",  color: "linear-gradient(135deg,#101D3A,#2a4a7f)" },
+  { image: "putseller.png", caption: "P&L Potential for Put Option Seller",   color: "linear-gradient(135deg,#0a8f8f,#0b3d5c)" },
+  { image: "putbuyer.png", caption: "P&L Potential for Put Option Buyer", color: "linear-gradient(135deg,#e4572e,#7a1f3d)" },
+  { image: "riskreward.png", caption: "Risks and Rewards",   color: "linear-gradient(135deg,#00aedb,#101D3A)" }
+];
+
+(function () {
+  const box = document.getElementById("slides");
+  const dotsBox = document.getElementById("car-dots");
+  const slideEls = [];
+  const dotEls = [];
+  let current = 0;
+  let timer = null;
+
+  SLIDES.forEach((slide) => {
+    const el = document.createElement("div");
+    el.className = "slide";
+    el.style.background = slide.color;
+
+    if (slide.image) {
+      const img = document.createElement("img");
+      img.src = slide.image;
+      img.alt = slide.caption;
+      img.onerror = () => img.remove();
+      el.appendChild(img);
+    }
+
+    const cap = document.createElement("div");
+    cap.className = "slide-caption";
+    cap.textContent = slide.caption;
+    el.appendChild(cap);
+
+    box.appendChild(el);
+    slideEls.push(el);
+
+    const dot = document.createElement("i");
+    dotsBox.appendChild(dot);
+    dotEls.push(dot);
+  });
+
+  function show(index) {
+    current = (index + slideEls.length) % slideEls.length;
+    slideEls.forEach((el, n) => el.classList.toggle("active", n === current));
+    dotEls.forEach((d, n) => d.classList.toggle("on", n === current));
+  }
+
+  function stop() { clearInterval(timer); timer = null; }
+
+  function start() {
+    stop();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    timer = setInterval(() => show(current + 1), CAROUSEL_SECONDS * 1000);
+  }
+
+  document.getElementById("car-prev").onclick = () => { show(current - 1); start(); };
+  document.getElementById("car-next").onclick = () => { show(current + 1); start(); };
+
+  const carousel = document.getElementById("carousel");
+  carousel.addEventListener("mouseenter", stop);
+  carousel.addEventListener("mouseleave", start);
+
+  show(0);
+  start();
+})();
 </script>
 </body>
 </html>
