@@ -600,7 +600,7 @@ const QA = [
       "strike price",
       "define strike price"
     ],
-    answer: `<p>The agreed selling price stated in the contract</p>`
+    answer: `<p>The strike price is the agreed price at which the buyer can sell the asset using a put option.</p>`
   },
   {
     keywords: [
@@ -615,7 +615,7 @@ const QA = [
     keywords: [
       "And who is considered the buyer?"
     ],
-    answer: `<p>The buyer pays the premium and gets the right to sell at the strike price</p>`
+    answer: `<p>The buyer is the person who pays the premium to get the right to sell the asset at the strike price.</p>`
   },
   {
     keywords: [
@@ -639,7 +639,7 @@ const QA = [
       "exercise a put option",
       "exercising an option"
     ],
-    answer: `<p>It means using your right to sell at the strike price. This is generally worthwhile when the option is in the money, otherwise, let it expire</p>`
+    answer: `<p>It means using your right to sell at the strike price. This is generally worthwhile when the option is in-the-money, otherwise, let it expire.</p>`
   },
   {
     keywords: [
@@ -673,20 +673,25 @@ const QA = [
     keywords: [
       "So I'm guessing that there are benefits to put options, what are they?"
     ],
-    answer: `<p>Protect against falling prices, helps limit potential losses, and allows for profiting from price decreases.</p>`
+    answer: `<p>Absolutely! Put options protect against falling prices, limit potential losses, and allow investors to profit from price decreases.</p>`
   },
   {
     keywords: [
       "And why are they important in financial management?"
     ],
-    answer: `<p>Mainly used for hedging.</p>`
+    answer: `<p>Put options are primarily used by financial managers and investors for hedging.</p>`
   },
   {
     keywords: [
       "I don't understand what hedging means. Please explain."
     ],
-    answer: `<p>Reducing the risk of loss</p>
-             <p>Using contracts to protect against bad price moves</p>`
+    answer: `<p>Hedging  is a way to reduce the risk of losing money by using financial contracts to protect against unfavorable changes in market prices.</p>`
+  },
+   {
+    keywords: [
+      "I see. So is there a specific way to use put options for hedging?",
+    ],
+    answer: `<p>A common strategy is called a protective put. This is when an investor owns shares of a stock and buys a put option on those same shares to protect against a possible price decrease.</p>`
   },
   {
     keywords: [
@@ -695,14 +700,11 @@ const QA = [
       "speculate with put options",
       "buy a put for speculation"
     ],
-    answer: `<p>Yes. This is called speculation.</p>`
+    answer: `<p>Yes! This is called speculation.</p>`
   },
   {
     keywords: [
-      "How is that different from short selling?",
-      "put option vs short selling",
-      "short selling",
-      "what is short selling"
+      "You mentioned that someone can buy a put option without owning the stock. Is that similar to short selling?",
     ],
     answer: `<p><strong>Short selling:</strong> borrow shares, sell, hope to buy back cheaper; losses can keep growing if the price rises</p>`
   },
@@ -710,11 +712,7 @@ const QA = [
     keywords: [
       "So what are the downsides of put options?"
     ],
-    answer: `<ul>
-               <li>Cost a premium</li>
-               <li>Can expire worthless</li>
-               <li>Protection ends at expiration</li>
-             </ul>`
+    answer: `<p>The main limitations and risks are that put options cost a premium, can expire worthless, and only provide protection until their expiration date.</p>
   },
   {
     keywords: [
@@ -753,7 +751,7 @@ const QA = [
   },
   {
     keywords: [
-      "What restrictions apply to put options?"
+      "Okay, and what restrictions apply to put options?"
     ],
     answer: `<ul>
                <li>Broker approval required</li>
@@ -765,7 +763,7 @@ const QA = [
     keywords: [
       "So that means that they are regulated?"
     ],
-    answer: `<p>Yes, exchange-traded options are standardized and a clearing house guarantees the trade.</p>`
+    answer: `<p>Yes. Exchange-traded options are standardized and backed by a clearing house, which guarantees the trade so neither side has to worry the other won’t pay.</p>`
   },
   {
     keywords: [
